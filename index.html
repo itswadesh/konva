@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/konva@9.2.0/konva.min.js"></script>
+    <meta charset="utf-8" />
+    <title>Konva Image Demo</title>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f0f0f0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+    <script>
+		
+      var width = window.innerWidth
+      var height = window.innerHeight
+
+      var stage = new Konva.Stage({
+        container: 'container',
+        width: width,
+        height: height,
+      })
+
+      const layer = new Konva.Layer()
+      const layer1 = new Konva.Layer()
+     
+
+      var group = new Konva.Group({
+        x:70,
+        y:70,
+        clipFunc: function (ctx) {
+          ctx.arc(150, 120, 60, 0, Math.PI * 2, false)
+        },
+        // draggable: true,
+      })
+
+      var group1 = new Konva.Group({
+        clipFunc: function (ctx) {
+          ctx.arc(150, 120, 60, 0, Math.PI * 2, false)
+        },
+        // draggable: true,
+      })
+
+      // main API:
+      var imageObj = new Image()
+      imageObj.onload = function () {
+        var img = new Konva.Image({
+          x: 50,
+          y: 50,
+          image: imageObj,
+          width: 156,
+          height: 118,
+          draggable:true
+        })
+        group.add(img)
+      }
+      imageObj.src = './assets/default.svg'
+      
+      // main API:
+      var imageObj1 = new Image()
+      imageObj1.onload = function () {
+        var img1 = new Konva.Image({
+          x: 20,
+          y: 50,
+          image: imageObj1,
+          width: 156,
+          height: 118,
+          draggable:true
+        })
+        group1.add(img1)
+      }
+      imageObj1.src = './assets/b.jpg'
+
+      layer1.add(group1)
+      layer.add(group)
+      stage.add(layer1)
+      stage.add(layer)
+    </script>
+  </body>
+</html>
